@@ -18,10 +18,15 @@ import {
 // Install react-router-dom and react icons..
 
 const Navbar = () => {
+  const [showMobileNav, setShowMobileNav] = useState(false);
+
   return (
     <nav className='navbar'>
       <SmallHeader />
-      <BiggerHeader />
+      <BiggerHeader
+        setShowMobileNav={setShowMobileNav}
+        showMobileNav={showMobileNav}
+      />
     </nav>
   );
 };
@@ -65,15 +70,7 @@ const SmallHeader = () => {
   );
 };
 
-const BiggerHeader = () => {
-  const toggleMenu = () => {
-    let item = document.querySelector('.mobile-navigation');
-    if (item.style.display === 'none') {
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  };
+const BiggerHeader = ({ setShowMobileNav, showMobileNav }) => {
   return (
     <>
       <nav className='bigger-header'>
@@ -84,7 +81,7 @@ const BiggerHeader = () => {
           <div className='nav-pc'>
             <HeaderNav />
           </div>
-          <button onClick={toggleMenu} className='mob-btn'>
+          <button onClick={() => setShowMobileNav(true)} className='mob-btn'>
             <span className='bars bar11'></span>
             <span className='bars bar12'></span>
             <span className='bars bar13'></span>
@@ -95,8 +92,11 @@ const BiggerHeader = () => {
         </div>
       </nav>
 
-      <nav className='mobile-navigation'>
-        <HeaderNav />
+      <nav
+        className='mobile-navigation'
+        style={{ display: showMobileNav ? `block` : `none` }}
+      >
+        <HeaderNav setShowMobileNav={setShowMobileNav} />
       </nav>
 
       <DynamicHeader />
@@ -104,38 +104,32 @@ const BiggerHeader = () => {
   );
 };
 
-const HeaderNav = () => {
-  const navlinks = document.querySelectorAll(`.navbar ul li a`);
-  console.log(navlinks);
-
-  navlinks.forEach((link) => {
-    link.addEventListener(`click`, () => {
-      let item = document.querySelector('.mobile-navigation');
-      item.style.display = 'none';
-    });
-  });
+const HeaderNav = ({ setShowMobileNav }) => {
+  const handleClick = () => {
+    setShowMobileNav(false);
+  };
 
   return (
     <>
       <ul>
-        <li>
+        <li onClick={handleClick}>
           <Link to='/'>Home</Link>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <Link to='/about'>About</Link>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <Link to='/team'>Team</Link>
         </li>
-        <li>
+        <li onClick={handleClick}>
           <Link to='/pricing'>Pricing</Link>
         </li>
 
-        <li>
+        <li onClick={handleClick}>
           <Link to='/testimonies'>Testimonies</Link>
         </li>
 
-        <li>
+        <li onClick={handleClick}>
           <Link to='/contactus'>Contact Us</Link>
         </li>
       </ul>
