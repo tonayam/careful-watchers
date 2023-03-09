@@ -12,8 +12,6 @@ import test1 from '../resources/images/client1-1-1-1-1.jpg';
 const Contact = () => {
   return (
     <>
-      <SmallHeader />
-      <BiggerHeader />
       <SmallHero title='Contact Us' />
       <section className='contact'>
         <section className='contact-upper'>

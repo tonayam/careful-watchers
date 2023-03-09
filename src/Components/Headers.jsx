@@ -17,6 +17,15 @@ import {
 
 // Install react-router-dom and react icons..
 
+const Navbar = () => {
+  return (
+    <nav className='navbar'>
+      <SmallHeader />
+      <BiggerHeader />
+    </nav>
+  );
+};
+
 const SmallHeader = () => {
   return (
     <>
@@ -185,5 +194,7 @@ const DynamicHeader = () => {
     </>
   );
 };
+
+export default Navbar;
 
 export { SmallHeader, BiggerHeader, DynamicHeader };
