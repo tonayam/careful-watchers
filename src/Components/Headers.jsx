@@ -105,6 +105,16 @@ const BiggerHeader = () => {
 };
 
 const HeaderNav = () => {
+  const navlinks = document.querySelectorAll(`.navbar ul li a`);
+  console.log(navlinks);
+
+  navlinks.forEach((link) => {
+    link.addEventListener(`click`, () => {
+      let item = document.querySelector('.mobile-navigation');
+      item.style.display = 'none';
+    });
+  });
+
   return (
     <>
       <ul>
